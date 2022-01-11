@@ -54,7 +54,7 @@ public class EditMenu extends JFrame implements ActionListener{
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - getSize().width) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - getSize().height) / 2);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setLayout(new BorderLayout());
-		
+		setResizable(false);
 		amount = new JTextField(15);
 		amount.setText("1");
 		
@@ -128,18 +128,32 @@ public class EditMenu extends JFrame implements ActionListener{
 			String count = amount.getText();
 			CommandExecutioner.sendQueue.add("addtableitem" + CommandExecutioner.cSep + MainWindow.eventManager.selectedTable.id + CommandExecutioner.iSep + item + CommandExecutioner.iSep + count);
 			CommandExecutioner.sendQueue.add("gettableitems");
+			MainWindow.eventManager.selectedTable.state = TableState.SelectedFull;
+			MainWindow.eventManager.selectedTable.updateTable();
+			CommandExecutioner.sendQueue.add("addtable" + CommandExecutioner.cSep + MainWindow.eventManager.selectedTable.id + CommandExecutioner.iSep + "1");
 			timer.start();
 		}
 		if(e.getSource().equals(removeButton)) {
 			
 			String[] items = CommandExecutioner.items.split(CommandExecutioner.lSep);
 			String item = "";
-		    for (int i = 0; i < items.length; i++)
-		       if(((String)tableitemlist.getSelectedValue()).startsWith(items[i].split(CommandExecutioner.iSep)[1]))
-		    	   item = (Integer.parseInt(items[i].split(CommandExecutioner.iSep)[0])) + "";
 			
-			CommandExecutioner.sendQueue.add("removetableitem" + CommandExecutioner.cSep + MainWindow.eventManager.selectedTable.id + CommandExecutioner.iSep + item);
-			CommandExecutioner.sendQueue.add("gettableitems");
+			try {
+			    for (int i = 0; i < items.length; i++)
+				       if(((String)tableitemlist.getSelectedValue()).startsWith(items[i].split(CommandExecutioner.iSep)[1]))
+				    	   item = (Integer.parseInt(items[i].split(CommandExecutioner.iSep)[0])) + "";
+			    CommandExecutioner.sendQueue.add("removetableitem" + CommandExecutioner.cSep + MainWindow.eventManager.selectedTable.id + CommandExecutioner.iSep + item);
+			    CommandExecutioner.sendQueue.add("gettableitems");
+			} catch (Exception e2) {
+				CommandExecutioner.sendQueue.add("removetable" + CommandExecutioner.cSep + MainWindow.eventManager.selectedTable.id);
+				MainWindow.tablePanel.tables.remove(MainWindow.eventManager.selectedTable);
+				MainWindow.tablePanel.remove(MainWindow.eventManager.selectedTable);
+				MainWindow.eventManager.selectedTable = null;
+				
+				 CommandExecutioner.sendQueue.add("gettables");
+				 setVisible(false);
+			}
+			
 			timer.start();
 		}
 		if(e.getSource().equals(timer)) {

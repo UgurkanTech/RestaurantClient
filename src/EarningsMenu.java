@@ -50,7 +50,7 @@ public class EarningsMenu extends JFrame implements ActionListener{
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - getSize().width) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - getSize().height) / 2);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setLayout(new BorderLayout());
-
+		setResizable(false);
 		clearButton.addActionListener(this);
 		closeButton.addActionListener(this);
 		
@@ -93,7 +93,10 @@ public class EarningsMenu extends JFrame implements ActionListener{
 	    for (int i = 0; i < earnings.length; i++) {
 	    	String[] e = earnings[i].split(CommandExecutioner.iSep);
 	    	if(e.length > 1) {
-	    		tableitemmodel.addElement(e[1] + " - " + e[0]);
+	    		tableitemmodel.addElement(e[1] + " ----- $" + e[0]);
+	    		
+	    		
+	    		
 		    	totalPrice += Integer.parseInt(e[0]);
 	    	}
 	    	
@@ -112,7 +115,7 @@ public class EarningsMenu extends JFrame implements ActionListener{
 			CommandExecutioner.sendQueue.add("clearearning" + CommandExecutioner.cSep + MainWindow.eventManager.selectedTable.id);
 			CommandExecutioner.sendQueue.add("getearnings");
 			timer.start();
-			
+			setVisible(false);
 		}
 		if(e.getSource().equals(closeButton)) {
 			

@@ -15,16 +15,19 @@ public class LoginWindow extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 
-	public Timer timer = new Timer(250, this);
+	public Timer timer = new Timer(100, this);
 	
-	static ImageIcon loginIcon = new ImageIcon(new ImageIcon("login.png").getImage().getScaledInstance(75, 75, Image.SCALE_FAST));
+	static ImageIcon loginIcon = new ImageIcon(new ImageIcon("login.png").getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH));
 	
 	JButton loginButton;
 	
 	JTextField userText;
 	JPasswordField passwordText;
 	
+	public static boolean loginwindow = false;
+	
 	public LoginWindow() {
+		loginwindow = true;
 		setSize(350, 150);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Login to RMS");
@@ -63,25 +66,33 @@ public class LoginWindow extends JFrame implements ActionListener{
 		setVisible(true);
 		
 	}
+	boolean once = true;
 	boolean loginResult = false;
 	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(loginButton)) {
-			timer.start();
 			CommandExecutioner.login(userText.getText(), passwordText.getText());
+			timer.start();
+			setTitle("Login - Connecting!");
 		}
 		
 		if (e.getSource().equals(timer)) {
 			if (CommandExecutioner.loginResult) {
 				setVisible(false);
 				timer.stop();
-				new MainWindow();
+				if(!MainWindow.started)
+					new MainWindow();
 				
 			}
 			else {
 				if (CommandExecutioner.loginErr) {
-					setTitle("Login - Invalid User!");
+					setTitle("Login - Login invalid!");
+					
+				}
+				if(once) {
+					CommandExecutioner.login(userText.getText(), passwordText.getText());
+					once = false;
 				}
 			}
 		}

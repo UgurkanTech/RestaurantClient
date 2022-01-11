@@ -29,7 +29,10 @@ public class MainWindow extends JFrame {
 	public static TableMenuPanel tableMenuPanel;
 	public static EventManager eventManager;
 	
+	public static boolean started = false;
+	
 	public MainWindow(){
+		started = true;
 		setSize(sizeX, sizeY);
 		setTitle("Restauran Management System");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

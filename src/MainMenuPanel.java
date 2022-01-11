@@ -90,6 +90,15 @@ public class MainMenuPanel extends JPanel {
 		showButton.addActionListener(MainWindow.eventManager);
 		showButton.setActionCommand("earnings");
 		
+		exitButton.addActionListener(MainWindow.eventManager);
+		exitButton.setActionCommand("exit");
+		
+		manageButton.addActionListener(MainWindow.eventManager);
+		manageButton.setActionCommand("manageitems");
+		
+		employeesButton.addActionListener(MainWindow.eventManager);
+		employeesButton.setActionCommand("employees");
+		
 		user.setText("<html>" + CommandExecutioner.username  + "<br> (Level: " + CommandExecutioner.loginPerm + ") </html>");
 		user.setForeground(Color.white);
 		user.setFont(MainWindow.font);

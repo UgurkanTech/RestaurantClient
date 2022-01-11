@@ -14,7 +14,7 @@ public class ConnectWindow extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 
-	static ImageIcon connectIcon = new ImageIcon(new ImageIcon("connect.png").getImage().getScaledInstance(75, 75, Image.SCALE_FAST));
+	static ImageIcon connectIcon = new ImageIcon(new ImageIcon("connect.png").getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH));
 	
 	public Timer timer = new Timer(250, this);
 	
@@ -74,7 +74,8 @@ public class ConnectWindow extends JFrame implements ActionListener{
 			if (client != null && ClientTCP.connected) {
 				setVisible(false);
 				timer.stop();
-				new LoginWindow();
+				if(!LoginWindow.loginwindow)
+					new LoginWindow();
 				
 			}
 		}

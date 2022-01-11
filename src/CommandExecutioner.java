@@ -128,7 +128,7 @@ public class CommandExecutioner{
 			break;
 		}
 		
-		System.out.println(command + " - executed!");
+		//System.out.println(command + " - executed!");
 	}
 	
 	public static void login(String user, String pass) {

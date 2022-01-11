@@ -1,6 +1,8 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 public class EventManager implements ActionListener{
 
 	public EventManager() {
@@ -100,20 +102,62 @@ public class EventManager implements ActionListener{
 		}
 		
 		if (e.getActionCommand().equals("add")) {
-			CommandExecutioner.sendQueue.add("addtable" + CommandExecutioner.cSep + (MainWindow.tablePanel.tables.size()+1) + CommandExecutioner.iSep + "0");
+			int counter = 1;
+			for (int i = 0; i < MainWindow.tablePanel.tables.size(); i++) {
+				if (counter ==  MainWindow.tablePanel.tables.get(i).id) {
+					counter++;
+				}
+				else {
+					break;
+				}
+			}
+			CommandExecutioner.sendQueue.add("addtable" + CommandExecutioner.cSep + (counter) + CommandExecutioner.iSep + "0");
 			CommandExecutioner.sendQueue.add("gettables");
 		}
 		
 		if (e.getActionCommand().equals("edit")) {
-			new EditMenu();
+			if (MainWindow.eventManager.selectedTable != null)
+				new EditMenu();
+			
 		}
 		if (e.getActionCommand().equals("review")) {
-			new ReviewMenu();
+			if (MainWindow.eventManager.selectedTable != null)
+				new ReviewMenu();
 		}
 		if (e.getActionCommand().equals("earnings")) {
 			new EarningsMenu();
 		}
+		if (e.getActionCommand().equals("exit")) {
+			System.exit(0);
+		}
+		if (e.getActionCommand().equals("manageitems")) {
+			if (CommandExecutioner.loginPerm < 4) {
+				JOptionPane.showMessageDialog(null, "You don't have permission.", "Permission level 4 required!", JOptionPane.ERROR_MESSAGE);
+				
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "This feature will be added soon..", "Opps!", JOptionPane.INFORMATION_MESSAGE);
+				//will be implemented
+			}
+			
+		}
+		if (e.getActionCommand().equals("employees")) {
+			if (CommandExecutioner.loginPerm < 4) {
+				JOptionPane.showMessageDialog(null, "You don't have permission.", "Permission level 4 required!", JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "This feature will be added soon..", "Opps!", JOptionPane.INFORMATION_MESSAGE);
+				//will be implemented
+			}
+		}
+		if (e.getActionCommand().equals("options")) {
+			new OptionsMenu();
+		}
+		if (e.getActionCommand().equals("support")) {
+			new SupportMenu();
+		}
 		
 	}
+	
 
 }

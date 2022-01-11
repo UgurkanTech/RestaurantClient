@@ -4,12 +4,19 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -43,12 +50,10 @@ public class ReviewMenu extends JFrame implements ActionListener{
 	
 	 JList tableitemlist;
 	 DefaultListModel tableitemmodel;
-	 
 
-	 
 	 JPanel innerPanel = new JPanel();
 
-	 JButton clearButton = new JButton("Clear Items & Save Purchase");
+	 JButton clearButton = new JButton("Confirm Purchase");
 	 JButton closeButton = new JButton("Close");
 	 
 	 Timer timer = new Timer(100, this);
@@ -57,15 +62,33 @@ public class ReviewMenu extends JFrame implements ActionListener{
 	 
 	 JLabel totalLabel = new JLabel("Total Price: $0");
 	 
+	 public static void play(String filename)
+	 {
+	     try
+	     {
+	         Clip clip = AudioSystem.getClip();
+	         clip.open(AudioSystem.getAudioInputStream(new File(filename)));
+	         clip.start();
+	     }
+	     catch (Exception exc)
+	     {
+	         exc.printStackTrace(System.out);
+	     }
+	 }
+	 
 	public ReviewMenu() {
 		setSize(500,500);
 		setTitle("Review Table");
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - getSize().width) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - getSize().height) / 2);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setLayout(new BorderLayout());
-
+		setResizable(false);
 		clearButton.addActionListener(this);
 		closeButton.addActionListener(this);
+		
+
+		
+		
 		
 		itemmodel = new DefaultListModel();
 	    itemlist = new JList(itemmodel);
@@ -96,6 +119,7 @@ public class ReviewMenu extends JFrame implements ActionListener{
 	    
 	    add(pane2, BorderLayout.CENTER);
 		setVisible(true);
+		
 	}
 	
 	private void updateLists() {
@@ -141,7 +165,14 @@ public class ReviewMenu extends JFrame implements ActionListener{
 			  System.out.println(date);
 			CommandExecutioner.sendQueue.add("addearning" + CommandExecutioner.cSep + (int)totalPrice + CommandExecutioner.iSep + date);
 			CommandExecutioner.sendQueue.add("getearnings");
+			if (OptionsMenu.sounds) {
+				play("cash.wav");
+			}
 			timer.start();
+			MainWindow.eventManager.selectedTable.state = TableState.SelectedEmpty;
+			MainWindow.eventManager.selectedTable.updateTable();
+			CommandExecutioner.sendQueue.add("addtable" + CommandExecutioner.cSep + MainWindow.eventManager.selectedTable.id + CommandExecutioner.iSep + "0");
+			setVisible(false);
 			
 		}
 		if(e.getSource().equals(closeButton)) {
