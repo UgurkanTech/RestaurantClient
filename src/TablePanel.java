@@ -21,7 +21,7 @@ public class TablePanel extends JPanel {
 	
 	public static final Dimension buttonSize = new Dimension(200, 100);
 	
-	JPanel innerPanel = new JPanel();
+	static JPanel innerPanel = new JPanel();
 	
 	public static ArrayList<TableButton> tables = new ArrayList<TableButton>(0);
 	
@@ -44,13 +44,6 @@ public class TablePanel extends JPanel {
 		innerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 25, 25));
 		innerPanel.setBackground(Color.white);
 		
-		for (int i = 1; i <= 16; i++) {
-			TableButton button = new TableButton(i + "", i);
-			button.setActionCommand("table" + i);
-			innerPanel.add(button);
-			tables.add(button);
-		}
-		
 		innerPanel.setPreferredSize(getPreferredSize());
 		//JScrollPane scrollFrame = new JScrollPane(innerPanel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		innerPanel.setAutoscrolls(true);
@@ -58,6 +51,8 @@ public class TablePanel extends JPanel {
 		innerPanel.setOpaque(false);
 		
 		add(innerPanel, BorderLayout.CENTER);
+		
+		CommandExecutioner.sendQueue.add("gettables");
 		
 	}
 	

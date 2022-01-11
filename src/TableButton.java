@@ -13,6 +13,7 @@ public class TableButton extends JButton{
 	public TableButton(String text, int id) {
 		super(text);
 		this.state = TableState.Empty;
+		updateTable();
 		this.id = id;
 		setUI(new TableButtonUI());
 		setFont(MainWindow.font);
@@ -20,7 +21,7 @@ public class TableButton extends JButton{
 		setPreferredSize(TablePanel.buttonSize);
 		setMinimumSize(new Dimension(100, 50));
 		addActionListener(MainWindow.eventManager);
-		updateTable();
+
 	}
 	
 	public void updateTable() {

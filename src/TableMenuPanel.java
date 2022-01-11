@@ -53,8 +53,20 @@ public class TableMenuPanel extends JPanel {
 		supportButton.setUI(new MenuButtonUI());
 		optionsButton.setUI(new MenuButtonUI());
 		
+		addButton.setActionCommand("add");
 		editButton.setActionCommand("edit");
+		reviewButton.setActionCommand("review");
+		statusButton.setActionCommand("status");
+		supportButton.setActionCommand("support");
+		optionsButton.setActionCommand("options");
+		
+		
+		addButton.addActionListener(MainWindow.eventManager);
 		editButton.addActionListener(MainWindow.eventManager);
+		reviewButton.addActionListener(MainWindow.eventManager);
+		statusButton.addActionListener(MainWindow.eventManager);
+		supportButton.addActionListener(MainWindow.eventManager);
+		optionsButton.addActionListener(MainWindow.eventManager);
 		
 		add(addButton);
 		add(Box.createVerticalStrut(75));

@@ -48,6 +48,8 @@ public class MainMenuPanel extends JPanel {
 		
 	};
 	
+	JLabel user = new JLabel("user");
+	
 	public MainMenuPanel(){
 		setBackground(Color.darkGray);
 		imagePanel.setBackground(Color.darkGray);
@@ -84,8 +86,17 @@ public class MainMenuPanel extends JPanel {
 		buttonsPanel.add(showButton);
 		buttonsPanel.add(Box.createVerticalStrut(75));
 		buttonsPanel.add(manageButton);
+		
+		showButton.addActionListener(MainWindow.eventManager);
+		showButton.setActionCommand("earnings");
+		
+		user.setText("<html>" + CommandExecutioner.username  + "<br> (Level: " + CommandExecutioner.loginPerm + ") </html>");
+		user.setForeground(Color.white);
+		user.setFont(MainWindow.font);
+		
 
 		buttonsPanel.add(Box.createVerticalGlue());
+		buttonsPanel.add(user);
 		buttonsPanel.add(Box.createVerticalGlue());
 		buttonsPanel.add(exitButton);
 		

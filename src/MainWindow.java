@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 
@@ -32,6 +33,7 @@ public class MainWindow extends JFrame {
 		setSize(sizeX, sizeY);
 		setTitle("Restauran Management System");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - getSize().width) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - getSize().height) / 2);
 		setVisible(true);
 		setLayout(new BorderLayout());
 		setIconImage(new ImageIcon("icon.png").getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
@@ -51,7 +53,7 @@ public class MainWindow extends JFrame {
 		add(mainMenuPanel, BorderLayout.EAST);
 		add(tableMenuPanel, BorderLayout.WEST);
 		
-
+		
 		revalidate();
 		pack();
 		
