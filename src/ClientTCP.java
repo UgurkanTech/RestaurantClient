@@ -3,6 +3,8 @@ import java.net.Socket;
 /**
  * A TCP Client
  * 
+ * All rights reserved.
+ * 
  * @author Uğurkan Hoşgör
  *
  */

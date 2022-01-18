@@ -40,7 +40,7 @@ public class LoginWindow extends JFrame implements ActionListener{
 		add(userLabel);
 
 		userText = new JTextField(32);
-		userText.setText("admin");
+		userText.setText("user");
 		userText.setBounds(160, 10, 165, 25);
 		add(userText);
 

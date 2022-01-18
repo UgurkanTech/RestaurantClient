@@ -4,15 +4,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,15 +13,16 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.Timer;
 
 public class EarningsMenu extends JFrame implements ActionListener{
 
 
 	private static final long serialVersionUID = 1L;
-
+	
+	 @SuppressWarnings("rawtypes")
 	 JList tableitemlist;
+	 @SuppressWarnings("rawtypes")
 	 DefaultListModel tableitemmodel;
 	 
 
@@ -44,6 +38,7 @@ public class EarningsMenu extends JFrame implements ActionListener{
 	 
 	 JLabel totalLabel = new JLabel("Total Earning: $0");
 	 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public EarningsMenu() {
 		setSize(500,500);
 		setTitle("Earnings Menu");
@@ -82,6 +77,7 @@ public class EarningsMenu extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void updateLists() {
 		tableitemmodel.clear();
 

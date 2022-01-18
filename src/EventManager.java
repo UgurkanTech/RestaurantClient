@@ -103,8 +103,8 @@ public class EventManager implements ActionListener{
 		
 		if (e.getActionCommand().equals("add")) {
 			int counter = 1;
-			for (int i = 0; i < MainWindow.tablePanel.tables.size(); i++) {
-				if (counter ==  MainWindow.tablePanel.tables.get(i).id) {
+			for (int i = 0; i < TablePanel.tables.size(); i++) {
+				if (counter ==  TablePanel.tables.get(i).id) {
 					counter++;
 				}
 				else {

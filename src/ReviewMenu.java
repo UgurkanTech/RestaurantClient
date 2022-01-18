@@ -5,21 +5,12 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-
-import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,9 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.Timer;
-
+@SuppressWarnings("rawtypes")
 public class ReviewMenu extends JFrame implements ActionListener{
 
 	class ItemPair{
@@ -46,7 +36,8 @@ public class ReviewMenu extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 
 	 JList itemlist;
-	 DefaultListModel itemmodel;
+
+	DefaultListModel itemmodel;
 	
 	 JList tableitemlist;
 	 DefaultListModel tableitemmodel;
@@ -76,6 +67,7 @@ public class ReviewMenu extends JFrame implements ActionListener{
 	     }
 	 }
 	 
+	@SuppressWarnings("unchecked")
 	public ReviewMenu() {
 		setSize(500,500);
 		setTitle("Review Table");
@@ -121,7 +113,7 @@ public class ReviewMenu extends JFrame implements ActionListener{
 		setVisible(true);
 		
 	}
-	
+	@SuppressWarnings("unchecked")
 	private void updateLists() {
 		tableitemmodel.clear();
 		itemmodel.clear();
@@ -157,8 +149,7 @@ public class ReviewMenu extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(clearButton)) {
-			int item = itemlist.getSelectedIndex()+1;
-			String count = "";
+
 			CommandExecutioner.sendQueue.add("cleartableitem" + CommandExecutioner.cSep + MainWindow.eventManager.selectedTable.id);
 			CommandExecutioner.sendQueue.add("gettableitems");
 			LocalDate date = LocalDate.now(); // Create a date object

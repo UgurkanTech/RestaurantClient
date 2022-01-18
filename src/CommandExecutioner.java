@@ -36,6 +36,7 @@ public class CommandExecutioner{
 		public void run() {
 			while(true) {
 				try {
+					//Login
 					if (tryLogin) {
 						String[] str = employees.split(lSep);
 						//System.out.println(str[0]);
@@ -52,7 +53,7 @@ public class CommandExecutioner{
 						}
 						loginErr = true;
 					}
-					
+					//Update tables
 					if(getTables || TablePanel.innerPanel.getComponents().length == 0) {
 						if (tables != "") {
 							String[] str = tables.split(lSep);
@@ -97,6 +98,8 @@ public class CommandExecutioner{
 	
 	static boolean tryLogin = false;
 	
+	//Handle input data
+	@SuppressWarnings("unused")
 	public static void execute(String command) {
 		
 		String cmd = command.split(cSep)[0];
@@ -137,6 +140,7 @@ public class CommandExecutioner{
 		passString = RMSUtils.Password.toHash(pass);
 		if(!workerThread.isAlive())
 			workerThread.start();
+		//init data
 		sendQueue.add("getemployees");
 		sendQueue.add("getitems");
 		sendQueue.add("gettableitems");

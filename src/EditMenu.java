@@ -5,11 +5,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.Timer;
-
+@SuppressWarnings("rawtypes")
 public class EditMenu extends JFrame implements ActionListener{
 
 	class ItemPair{
@@ -34,7 +31,8 @@ public class EditMenu extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 
 	 JList itemlist;
-	 DefaultListModel itemmodel;
+	 
+	DefaultListModel itemmodel;
 	
 	 JList tableitemlist;
 	 DefaultListModel tableitemmodel;
@@ -48,6 +46,7 @@ public class EditMenu extends JFrame implements ActionListener{
 	 
 	 Timer timer = new Timer(100, this);
 	 
+	@SuppressWarnings("unchecked")
 	public EditMenu() {
 		setSize(500,300);
 		setTitle("Edit Table");
@@ -87,7 +86,7 @@ public class EditMenu extends JFrame implements ActionListener{
 	    add(pane2, BorderLayout.EAST);
 		setVisible(true);
 	}
-	
+	@SuppressWarnings("unchecked")
 	private void updateLists() {
 		tableitemmodel.clear();
 		itemmodel.clear();
@@ -146,7 +145,7 @@ public class EditMenu extends JFrame implements ActionListener{
 			    CommandExecutioner.sendQueue.add("gettableitems");
 			} catch (Exception e2) {
 				CommandExecutioner.sendQueue.add("removetable" + CommandExecutioner.cSep + MainWindow.eventManager.selectedTable.id);
-				MainWindow.tablePanel.tables.remove(MainWindow.eventManager.selectedTable);
+				TablePanel.tables.remove(MainWindow.eventManager.selectedTable);
 				MainWindow.tablePanel.remove(MainWindow.eventManager.selectedTable);
 				MainWindow.eventManager.selectedTable = null;
 				

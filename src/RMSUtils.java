@@ -14,9 +14,14 @@ import java.util.zip.GZIPOutputStream;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+/*
+ * Useful utilities.
+ */
 
 public class RMSUtils {
-	
+	/*
+	 * Password Manager.
+	 */
 	public static class Password{
 		private static String salt = "RMS";
 		private static String secret = "SmolKitten";
@@ -49,7 +54,10 @@ public class RMSUtils {
 		}
 		
 	}
-	
+	/*
+	 * Gzip compressor
+	 */
+
 	public static class Compressor{
 		
 		public static byte[] Compress(byte[] uncompressedData) {
@@ -97,6 +105,9 @@ public class RMSUtils {
 	}
 	
 	
+	/*
+	 * AES Encryption
+	 */
 	public static class AES {
 		 
 	 
